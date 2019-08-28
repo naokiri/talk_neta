@@ -1,7 +1,61 @@
-<head></head>
+<html>
+<head>
+<style>
+/* colors from http://www.cudo.jp/ */
+div.compositionevent.color {
+    background-color: #ffd1d1;
+}
+div.keyevent.color {
+    background-color: #b4ebfa;
+}
+div.compositionstart.color{
+    color: #ff2800;
+}
+div.compositionupdate.color{
+    color: #ff9900;
+}
+div.compositionend.color{
+    color: #9a0079;
+}
+div.keydown.color {
+    color: #35a16b;
+}
+div.keypress.color {
+    color: #663300;
+}
+div.keyup.color {
+    color: #0041ff;
+}
+</style>
+</head>
 <body>
 <div>
-    <textarea></textarea>
+    <textarea id="textarea"></textarea>
+    <input type="button" id="reset" value="Reset"/>
+    <input type="button" id="color" value="show color"/>
 </div>
-</body>
+<div id="events">
 
+</div>
+<script>
+    var eventArea = document.getElementById('events');
+    var inputArea = document.getElementById('textarea');
+    var showCompositionEvent = function (e) {
+        eventArea.insertAdjacentHTML('beforeend', `<div class='compositionevent ${e.type}'>${e.type}: ${e.data}</div>`);
+    };
+    var showKeyEvent = function (e) {
+        eventArea.insertAdjacentHTML('beforeend', `<div class='keyevent ${e.type}'>${e.type}: ${e.code}</div>`);
+    };
+
+    var compositionEventList = ["compositionstart", "compositionupdate", "compositionend"];
+    compositionEventList.map( eventName => inputArea.addEventListener(eventName, showCompositionEvent));
+
+    var keyEventList = ["keydown", "keypress", "keyup"];
+    keyEventList.map( eventName => inputArea.addEventListener(eventName, showKeyEvent));
+
+    document.getElementById('reset').addEventListener('click', () => eventArea.innerHTML = '');
+
+    document.getElementById('color').addEventListener('click', () => { var children = eventArea.children; for(var i =0; i<children.length;i++) {children[i].classList.add('color')}});
+</script>
+</body>
+</html>
