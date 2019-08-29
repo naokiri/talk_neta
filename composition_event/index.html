@@ -44,7 +44,7 @@ div.keyup.color {
         eventArea.insertAdjacentHTML('beforeend', `<div class='compositionevent ${e.type}'>${e.type}: ${e.data}</div>`);
     };
     var showKeyEvent = function (e) {
-        eventArea.insertAdjacentHTML('beforeend', `<div class='keyevent ${e.type}'>${e.type}: ${e.key}</div>`);
+        eventArea.insertAdjacentHTML('beforeend', `<div class='keyevent ${e.type}'>${e.type}: key:${e.key} code:${e.code}</div>`);
     };
 
     var compositionEventList = ["compositionstart", "compositionupdate", "compositionend"];
