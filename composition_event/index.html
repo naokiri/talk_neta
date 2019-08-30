@@ -53,7 +53,7 @@ div.keyup.color {
     var keyEventList = ["keydown", "keypress", "keyup"];
     keyEventList.map( eventName => inputArea.addEventListener(eventName, showKeyEvent));
 
-    document.getElementById('reset').addEventListener('click', () => eventArea.innerHTML = '');
+    document.getElementById('reset').addEventListener('click', () => { eventArea.innerHTML = ''; inputArea.value = ''; });
 
     document.getElementById('color').addEventListener('click', () => { var children = eventArea.children; for(var i =0; i<children.length;i++) {children[i].classList.add('color')}});
 </script>
